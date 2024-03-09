@@ -58,7 +58,7 @@
 <div>
     @if(ViewBag.Apply == false)
     {
-        <a asp-action="Create" asp-controller="ProJobs" asp-route-id="@Model?.Id">Apply |</a>
+        <a class="btn btn-primary" asp-action="Create" asp-controller="ProJobs" asp-route-id="@Model?.Id">Apply |</a>
     }
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-danger" asp-action="ListJob">Back to List</a>
 </div>

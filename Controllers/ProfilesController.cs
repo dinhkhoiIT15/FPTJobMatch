@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTJobMatch.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FPTJobMatch.Controllers
 {
+    [Authorize(Roles = "Admin, Job seeker, Employer")]
     public class ProfilesController : Controller
     {
         private readonly DB1670Context _context;

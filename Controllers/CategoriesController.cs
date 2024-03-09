@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FPTJobMatch.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly DB1670Context _context;
@@ -19,13 +18,13 @@ namespace FPTJobMatch.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Admin, Employer, Job seeker")]
         // GET: Categories
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categories.ToListAsync()); //get categories and show as a list
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,7 +42,7 @@ namespace FPTJobMatch.Controllers
 
             return View(category);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Create
         public IActionResult Create()
         {
@@ -65,7 +64,7 @@ namespace FPTJobMatch.Controllers
             }
             return View(category);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -116,7 +115,7 @@ namespace FPTJobMatch.Controllers
             }
             return View(category);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

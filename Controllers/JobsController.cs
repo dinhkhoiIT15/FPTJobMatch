@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTJobMatch.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FPTJobMatch.Controllers
 {
@@ -17,38 +18,38 @@ namespace FPTJobMatch.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Admin, Employer")]
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
             var dB1670Context = _context.Jobs.Include(j => j.ObjCategory);
             return View(await dB1670Context.ToListAsync());
         }
-
+        [Authorize(Roles = "Admin, Employer, Job seeker")]
 		public async Task<IActionResult> ListJob()
 		{
 			var dB1670Context = _context.Jobs.Include(j => j.ObjCategory).Where(j=>j.Deadline >= DateTime.Now);
 			return View(await dB1670Context.ToListAsync());
 		}
 
-		// GET: Jobs/Details/5
-		public async Task<IActionResult> Details(int? id)
+        // GET: Jobs/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Jobs == null)
             {
                 return NotFound();
             }
 
-            var job = await _context.Jobs
-                .Include(j => j.ObjCategory)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var job = await _context.Jobs.Include(j => j.ObjCategory).FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
                 return NotFound();
             }
 
             var proJob = _context.ProJob.Include(p => p.ObjProfile).Where(p => p.JobId == id);
+
             var profile = _context.Profile.Where(p => p.UserId == User.Identity.Name).FirstOrDefault();
+
             if (proJob.Where(p => p.ProfileId == profile.Id).Count() > 0 && proJob.Count() > 0)
             {
                 ViewBag.Apply = true;
@@ -60,7 +61,7 @@ namespace FPTJobMatch.Controllers
 
             return View(job);
         }
-
+        [Authorize(Roles = "Admin, Employer")]
         // GET: Jobs/Create
         public IActionResult Create()
         {

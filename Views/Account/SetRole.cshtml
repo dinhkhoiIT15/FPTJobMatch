@@ -3,7 +3,7 @@
     ViewData["Title"] = "Set Role";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1>@ViewData["Title"]</h1>
 
 <form asp-action="SetRole" method="post">
     <label for="userId">User:</label>
@@ -13,7 +13,7 @@
             <option value="@userId">@userId</option>
         }
     </select>
-
+    <br />
     <label for="role">Role:</label>
     <select id="role" name="role">
         <option value="Admin">Admin</option>
@@ -21,5 +21,5 @@
         <option value="Job seeker">Job Seeker</option>
     </select>
 
-    <button type="submit">Set role</button>
+    <button type="submit" style="background: #AAE800; color: white">Set role</button>
 </form>

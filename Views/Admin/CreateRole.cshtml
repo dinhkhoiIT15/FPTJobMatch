@@ -3,11 +3,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Role</h2>
+<h1>Create New Role</h1>
 <form method="post" action="/Admin/CreateRole">
-    <div>
-        <label for="roleName">Role's Name:</label>
-        <input type="text" id="roleName" name="roleName" required />
+    @* <div>
+        <label for="roleName">Role name: </label>
+        <input class="form-control" type="text" id="roleName" name="roleName" required />
     </div>
-    <button type="submit">Submit</button>
+    <button type="submit">Submit</button> *@
+
 </form>
+<div class="ml-0">
+    <form method="post" action="/Admin/CreateRole">
+        <p formaction="roleName">Role name: </p>
+        <input class="ml-auto" type="text" name="roleName" id="roleName" required />
+        <button type="submit" style="background: #AAE800; color: white">Submit</button>
+    </form>
+</div>
