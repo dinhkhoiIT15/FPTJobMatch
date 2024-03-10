@@ -1,6 +1,23 @@
-﻿<h1>
-    Role create successfully?
-</h1>
-<div>
-    <a class="btn btn-primary" asp-action="CreateRole">Back to previous page</a>
-</div>
+﻿@{
+    ViewData["Title"] = "Create ";
+}
+
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">@ViewData["Title"]</h2>
+        <div class="alert alert-success" role="alert">
+            Create Role Successfully
+        </div>
+        <a class="btn btn-danger w-auto rounded-pill" asp-action="CreateRole">Back to previous page</a>
+    </div>
+</body>
