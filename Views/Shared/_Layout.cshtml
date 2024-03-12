@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -37,37 +42,32 @@
 
             <!-- right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <!-- SEARCH FORM -->
-                    <form class="form-inline ml-3">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <a href="https://localhost:7223/Identity/account/login" class="nav-link">
-                        <p style="color: black">Login</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="https://localhost:7223/Identity/Account/Register?returnUrl=%2F" class="nav-link">
-                        <p style="color: black">Register</p>
-                    </a>
-                </li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    </li>
+                    <li class="nav-item">
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </li>
+                }
             </ul>
         </nav>
-        <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar elevation-4" style="background-color: #B6B5B8;">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="https://localhost:7223/" class="brand-link">
                 <img src="../../dist/img/Logo.jpg"
                      alt="AdminLTE Logo"
                      class="brand-image img-circle elevation-3"
@@ -122,6 +122,8 @@
                                     <a style="color: black" class="fw-bold" href="https://localhost:7223/Jobs/Create">Create new job</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <p style="color: black">
                                     Profiles
@@ -136,6 +138,42 @@
                                 <li class="nav-item ml-3">
                                     <i class="far fa-circle nav-icon"></i>
                                     <a style="color: black" class="fw-bold" href="https://localhost:7223/Profiles/Create">Create profile</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <p style="color: black">
+                                    Admin Management
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ml-3">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <a style="color: black" class="fw-bold" href="https://localhost:7223/admin/createrole">Create role</a>
+                                </li>
+                                <li class="nav-item ml-3">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <a style="color: black" class="fw-bold" href="https://localhost:7223/account/setrole">Set role</a>
+                                </li>
+                                <li class="nav-item ml-3">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <a style="color: black" class="fw-bold" href="https://localhost:7223/account/userlist">User list</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <p style="color: black">
+                                    Account Management
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ml-3">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <a style="color: black" class="fw-bold" href="https://localhost:7223/Identity/account/manage/changepassword">Change password</a>
                                 </li>
                             </ul>
                         </li>
@@ -156,16 +194,16 @@
                 <div class="row">
                     <div class="col-12">
                         @RenderBody()
+                        <!-- /.card -->
+                        <!-- /.card-body -->
+                    </div>
                     <!-- /.card -->
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
+                <!-- /.col -->
         </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    </section>
-    <!-- /.content -->
+        <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
