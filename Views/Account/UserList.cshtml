@@ -2,12 +2,13 @@
 
 @model List<IdentityUser>
 
+<h1>List all users</h1>
 <table class="table">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>Username</th>
             <th>Email</th>
-            <th>Action</th>
+            <th class="text-lg-center">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -16,10 +17,10 @@
             <tr>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
-                <td>
+                <td class="text-lg-center">
                     <form asp-action="ResetPassword" method="post">
                         <input type="hidden" name="userId" value="@user.Id" />
-                        <button type="submit" class="btn btn-primary">Reset Password</button>
+                        <button type="submit" class="btn btn-primary w-auto rounded-pill">Reset Password</button>
                     </form>
                 </td>
             </tr>
