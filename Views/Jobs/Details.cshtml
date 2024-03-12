@@ -5,60 +5,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Job Details</h1>
 
 <div>
-    <h4>Job</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Qualification)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Qualification)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Location)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Location)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Industry)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Industry)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Deadline)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Deadline)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ObjCategory)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ObjCategory.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ObjCategory.Name)
         </dd>
     </dl>
 </div>
 <div>
-    @if(ViewBag.Apply == false)
+    @if (ViewBag.Apply == false)
     {
-        <a class="btn btn-primary" asp-action="Create" asp-controller="ProJobs" asp-route-id="@Model?.Id">Apply |</a>
+        <a class="btn btn-primary" asp-action="Create" asp-controller="ProJobs" asp-route-id="@Model?.Id">Apply</a>
     }
     <a class="btn btn-danger" asp-action="ListJob">Back to List</a>
 </div>
