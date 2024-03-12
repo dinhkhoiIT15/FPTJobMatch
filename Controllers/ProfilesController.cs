@@ -15,20 +15,17 @@ namespace FPTJobMatch.Controllers
     {
         private readonly DB1670Context _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
         public ProfilesController(DB1670Context context, 
             IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
-
         // GET: Profiles
         public async Task<IActionResult> Index()
         {
             return View(await _context.Profile.ToListAsync());
         }
-
         // GET: Profiles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -46,14 +43,12 @@ namespace FPTJobMatch.Controllers
 
             return View(profile);
         }
-
         // GET: Profiles/Create
         public IActionResult Create()
         {
             ViewBag.UserId = User.Identity.Name;
             return View();
         }
-
 		private string GetUniqueFileName(string fileName)
 		{
 			fileName = Path.GetFileName(fileName);
@@ -62,10 +57,7 @@ namespace FPTJobMatch.Controllers
 				   + Guid.NewGuid().ToString().Substring(0, 4)
 				   + Path.GetExtension(fileName);
 		}
-
 		// POST: Profiles/Create
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,FullName,Address,Skill,Education,MyFile,ImageFile")] Profile profile)
@@ -88,7 +80,6 @@ namespace FPTJobMatch.Controllers
             }
             return View(profile);
         }
-
         // GET: Profiles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -104,10 +95,7 @@ namespace FPTJobMatch.Controllers
             }
             return View(profile);
         }
-
         // POST: Profiles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,FullName,Address,Skill,Education,MyFile")] Profile profile)
@@ -139,7 +127,6 @@ namespace FPTJobMatch.Controllers
             }
             return View(profile);
         }
-
         // GET: Profiles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -157,7 +144,6 @@ namespace FPTJobMatch.Controllers
 
             return View(profile);
         }
-
         // POST: Profiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -172,7 +158,6 @@ namespace FPTJobMatch.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool ProfileExists(int id)
         {
             return _context.Profile.Any(e => e.Id == id);

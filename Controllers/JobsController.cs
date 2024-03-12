@@ -31,7 +31,7 @@ namespace FPTJobMatch.Controllers
 			var dB1670Context = _context.Jobs.Include(j => j.ObjCategory).Where(j=>j.Deadline >= DateTime.Now);
 			return View(await dB1670Context.ToListAsync());
 		}
-
+        [Authorize(Roles = "Admin, Employer, Job seeker")]
         // GET: Jobs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,10 +68,7 @@ namespace FPTJobMatch.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
-
         // POST: Jobs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,Qualification,Location,Industry,Deadline,CategoryId")] Job job)
@@ -85,7 +82,7 @@ namespace FPTJobMatch.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", job.CategoryId);
             return View(job);
         }
-
+        [Authorize(Roles = "Admin, Employer")]
         // GET: Jobs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -102,10 +99,7 @@ namespace FPTJobMatch.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", job.CategoryId);
             return View(job);
         }
-
         // POST: Jobs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Qualification,Location,Industry,Deadline,CategoryId")] Job job)
@@ -138,7 +132,7 @@ namespace FPTJobMatch.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", job.CategoryId);
             return View(job);
         }
-
+        [Authorize(Roles = "Admin, Employer")]
         // GET: Jobs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -157,7 +151,6 @@ namespace FPTJobMatch.Controllers
 
             return View(job);
         }
-
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -172,7 +165,6 @@ namespace FPTJobMatch.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool JobExists(int id)
         {
             return _context.Jobs.Any(e => e.Id == id);

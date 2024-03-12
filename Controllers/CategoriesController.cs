@@ -22,7 +22,7 @@ namespace FPTJobMatch.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync()); //get categories and show as a list
+            return View(await _context.Categories.ToListAsync());
         }
         [Authorize(Roles = "Admin")]
         // GET: Categories/Details/5
@@ -34,7 +34,7 @@ namespace FPTJobMatch.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id); //get the first element
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -48,10 +48,7 @@ namespace FPTJobMatch.Controllers
         {
             return View();
         }
-
         // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Status")] Category category)
@@ -82,8 +79,6 @@ namespace FPTJobMatch.Controllers
         }
 
         // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Status")] Category category)
@@ -128,22 +123,6 @@ namespace FPTJobMatch.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var category = await _context.Categories.FindAsync(id);
-        //    if (category != null)
-        //    {
-        //        _context.Categories.Remove(category);
-        //    }
-
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
         private bool CategoryExists(int id)
         {
             return _context.Categories.Any(e => e.Id == id);

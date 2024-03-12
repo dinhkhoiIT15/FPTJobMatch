@@ -13,19 +13,16 @@ namespace FPTJobMatch.Controllers
     public class ProJobsController : Controller
     {
         private readonly DB1670Context _context;
-
         public ProJobsController(DB1670Context context)
         {
             _context = context;
         }
-
         // GET: ProJobs
         public async Task<IActionResult> Index(int id)
         {
             var dB1670Context = _context.ProJob.Include(p => p.ObjJob).Include(p => p.ObjProfile).Where(p => p.JobId == id);
             return View(await dB1670Context.ToListAsync());
         }
-
         // GET: ProJobs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +42,6 @@ namespace FPTJobMatch.Controllers
 
             return View(proJob);
         }
-
         // GET: ProJobs/Create
         public IActionResult Create(int id)
         {
@@ -58,10 +54,7 @@ namespace FPTJobMatch.Controllers
 
             return RedirectToAction("ListJob", "Jobs");
         }
-
         // POST: ProJobs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ReDate,ProfileId,JobId")] ProJob proJob)
@@ -76,7 +69,6 @@ namespace FPTJobMatch.Controllers
             ViewData["ProfileId"] = new SelectList(_context.Profile, "Id", "Id", proJob.ProfileId);
             return View(proJob);
         }
-
         // GET: ProJobs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -94,10 +86,7 @@ namespace FPTJobMatch.Controllers
             ViewData["ProfileId"] = new SelectList(_context.Profile, "Id", "Id", proJob.ProfileId);
             return View(proJob);
         }
-
         // POST: ProJobs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ReDate,ProfileId,JobId")] ProJob proJob)
@@ -131,7 +120,6 @@ namespace FPTJobMatch.Controllers
             ViewData["ProfileId"] = new SelectList(_context.Profile, "Id", "Id", proJob.ProfileId);
             return View(proJob);
         }
-
         // GET: ProJobs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -151,7 +139,6 @@ namespace FPTJobMatch.Controllers
 
             return View(proJob);
         }
-
         // POST: ProJobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -166,7 +153,6 @@ namespace FPTJobMatch.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool ProJobExists(int id)
         {
             return _context.ProJob.Any(e => e.Id == id);
