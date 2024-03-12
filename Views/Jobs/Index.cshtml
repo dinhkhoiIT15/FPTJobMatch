@@ -7,8 +7,8 @@
 
 <h1>List all jobs</h1>
 <table class="table">
-    <thead>
-        <tr>
+    <thead class="table-dark">
+        <tr class="text-lg-left">
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -28,42 +28,45 @@
                 @Html.DisplayNameFor(model => model.Deadline)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ObjCategory)
+                Category
             </th>
-            <th></th>
+            <th class="text-lg-center">
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qualification)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Industry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Deadline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ObjCategory.Id)
-            </td>
-            <td>
-                <a asp-action="Index" asp-controller="ProJobs" asp-route-id="@item.Id">Applied</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="text-lg-left">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td class="text-lg-center">
+                    @Html.DisplayFor(modelItem => item.Qualification)
+                </td>
+                <td class="text-lg-center">
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Industry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObjCategory.Name)
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-success w-auto rounded-pill" asp-action="Index" asp-controller="ProJobs" asp-route-id="@item.Id">Applied</a>
+                    <a class="btn btn-warning w-auto rounded-pill" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-primary w-auto rounded-pill" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger w-auto rounded-pill" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
