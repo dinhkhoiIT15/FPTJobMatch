@@ -8,7 +8,7 @@
 <h1>List profiles</h1>
 
 <table class="table">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.UserId)
@@ -28,36 +28,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.MyFile)
             </th>
-            <th></th>
+            <th class="text-lg-center">
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Skill)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Education)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MyFile)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Skill)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Education)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MyFile)
+                </td>
+                <td class="text-lg-center">
+                    <a class="btn btn-warning w-auto rounded-pill" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-primary w-auto rounded-pill" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger w-auto rounded-pill" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

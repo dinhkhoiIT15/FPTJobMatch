@@ -13,8 +13,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" 
-                    value="@ViewBag.UserId" re/>
+                <input asp-for="UserId" class="form-control"
+                       value="@ViewBag.UserId" re />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,16 +39,18 @@
             </div>
             <div class="form-group">
                 <label for="ImageFile">Choose an file</label>
-                <input type="file" name="ImageFile" class="form-control-file"/>
+                <input type="file" name="ImageFile" class="form-control-file" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-                <a class="btn btn-danger" asp-action="Index">Back to List</a>
+                <input type="submit" value="Create" class="btn btn-success w-auto rounded-pill" />
+                <a class="btn btn-danger w-auto rounded-pill" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
