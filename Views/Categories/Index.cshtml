@@ -6,33 +6,36 @@
 }
 
 <h1>List categories</h1>
-<table id="example1" class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
+<table class="table">
+    <thead class="table-dark">
+        <tr class="text-lg-center">
+            <th class="text-left">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            <th></th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="text-lg-center">
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a class="btn btn-warning w-auto rounded-pill" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-primary w-auto rounded-pill" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger w-auto rounded-pill" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
